@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SBRSystem_API.GraphQl;
 using SBRSystem_Data.Context;
 
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<MySBRDbContext>();
+builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;"));
 
 
 
@@ -17,8 +18,8 @@ builder.Services.AddDbContext<MySBRDbContext>();
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddProjections()
-    .RegisterDbContextFactory<MySBRDbContext>();
+    .AddMutationType<Mutations>()
+    .RegisterDbContext<MySBRDbContext>();
     
 
 var app = builder.Build();

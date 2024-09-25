@@ -16,57 +16,53 @@ public partial class MySBRDbContext : DbContext
     {
     }
 
-    public virtual DbSet<BpmCategorium> BpmCategoria { get; set; }
+    public DbSet<BpmCategorium> BpmCategoria { get; set; }
 
-    public virtual DbSet<BpmSubcategorium> BpmSubcategoria { get; set; }
+    public DbSet<BpmSubcategorium> BpmSubcategoria { get; set; }
 
-    public virtual DbSet<Documento> Documentos { get; set; }
+    public DbSet<Documento> Documentos { get; set; }
 
-    public virtual DbSet<Entidad> Entidads { get; set; }
+    public DbSet<Entidad> Entidads { get; set; }
 
-    public virtual DbSet<Establecimiento> Establecimientos { get; set; }
+    public DbSet<Establecimiento> Establecimientos { get; set; }
 
-    public virtual DbSet<EstadoFisico> EstadoFisicos { get; set; }
+    public  DbSet<EstadoFisico> EstadoFisicos { get; set; }
 
-    public virtual DbSet<Factor> Factors { get; set; }
+    public DbSet<Factor> Factors { get; set; }
 
-    public virtual DbSet<Ficha> Fichas { get; set; }
+    public DbSet<Ficha> Fichas { get; set; }
 
-    public virtual DbSet<Grupo> Grupos { get; set; }
+    public DbSet<Grupo> Grupos { get; set; }
 
-    public virtual DbSet<Opcion> Opcions { get; set; }
+    public DbSet<Opcion> Opcions { get; set; }
 
-    public virtual DbSet<Preguntum> Pregunta { get; set; }
+    public DbSet<Preguntum> Pregunta { get; set; }
 
-    public virtual DbSet<Producto> Productos { get; set; }
+    public DbSet<Producto> Productos { get; set; }
 
-    public virtual DbSet<ProductoEntidad> ProductoEntidads { get; set; }
+    public DbSet<ProductoEntidad> ProductoEntidads { get; set; }
 
-    public virtual DbSet<Registro> Registros { get; set; }
+    public DbSet<Registro> Registros { get; set; }
 
-    public virtual DbSet<Relacion> Relacions { get; set; }
+    public DbSet<Relacion> Relacions { get; set; }
 
-    public virtual DbSet<Respuestum> Respuesta { get; set; }
+    public DbSet<Respuestum> Respuesta { get; set; }
 
-    public virtual DbSet<Riesgo> Riesgos { get; set; }
+    public DbSet<Riesgo> Riesgos { get; set; }
 
-    public virtual DbSet<RiesgoCategorium> RiesgoCategoria { get; set; }
+    public DbSet<RiesgoCategorium> RiesgoCategoria { get; set; }
 
-    public virtual DbSet<RiesgoSubcategorium> RiesgoSubcategoria { get; set; }
+    public DbSet<RiesgoSubcategorium> RiesgoSubcategoria { get; set; }
 
-    public virtual DbSet<Rol> Rols { get; set; }
+    public DbSet<Rol> Rols { get; set; }
 
-    public virtual DbSet<Solicitud> Solicituds { get; set; }
+    public DbSet<Solicitud> Solicituds { get; set; }
 
-    public virtual DbSet<TipoDocumento> TipoDocumentos { get; set; }
+    public DbSet<TipoDocumento> TipoDocumentos { get; set; }
 
-    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
-    public virtual DbSet<Valor> Valors { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;");
+    public DbSet<Valor> Valors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

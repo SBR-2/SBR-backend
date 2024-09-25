@@ -11,8 +11,16 @@ public class Query
         List<Riesgo> lst = context.Riesgos.ToList();
 
         List<RiesgoDto> lst2 = new List<RiesgoDto>();
+
+        lst2.Add(new RiesgoDto
+        {
+            Estado = true,
+            Riesgo1 = "",
+            RiesgoId = 1
+        });
         
 
         return lst2.AsQueryable();
-    }  
+    }
+    public static IQueryable<Riesgo> GetServicios(MySBRDbContext context) => context.Riesgos;
 }
