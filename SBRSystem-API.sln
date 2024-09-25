@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBRSystem-API", "SBRSystem-API\SBRSystem-API.csproj", "{DDDCEF54-3DDF-44C1-9163-F6C16FD55E13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBRSystem-Data", "SBRSystem-Data\SBRSystem-Data.csproj", "{52E86F2B-2D8D-46C0-A8F4-EE4B771F8E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBRSystem-Repository", "SBRSystem-Repository\SBRSystem-Repository.csproj", "{9AA31B2B-A1F9-4A12-9C03-6955FB2CCA28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{DDDCEF54-3DDF-44C1-9163-F6C16FD55E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDCEF54-3DDF-44C1-9163-F6C16FD55E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDDCEF54-3DDF-44C1-9163-F6C16FD55E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E86F2B-2D8D-46C0-A8F4-EE4B771F8E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E86F2B-2D8D-46C0-A8F4-EE4B771F8E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E86F2B-2D8D-46C0-A8F4-EE4B771F8E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E86F2B-2D8D-46C0-A8F4-EE4B771F8E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA31B2B-A1F9-4A12-9C03-6955FB2CCA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA31B2B-A1F9-4A12-9C03-6955FB2CCA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA31B2B-A1F9-4A12-9C03-6955FB2CCA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA31B2B-A1F9-4A12-9C03-6955FB2CCA28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
