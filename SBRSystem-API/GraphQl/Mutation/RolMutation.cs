@@ -44,4 +44,27 @@ namespace SBRSystem_API.GraphQl;
             return rol;
         }
 
+         public async Task<bool> DeleteRol(DeleteRolInput input, [Service] MySBRDbContext context)
+        {
+            var rol = await context.Rols.FindAsync(input.RolId);
+            if (rol == null)
+            {
+                throw new GraphQLException("Role not found.");
+            }
+    
+            // Eliminar el rol
+            context.Rols.Remove(rol);
+    
+            try
+            {
+                await context.SaveChangesAsync();
+                return true;  // Si la eliminación fue exitosa, devolvemos true
+            }
+            catch (DbUpdateException ex)
+            {
+                var innerExceptionMessage = ex.InnerException?.Message;
+                throw new Exception($"Error deleting the role: {innerExceptionMessage}", ex);
+            }
+        }
+
     }
