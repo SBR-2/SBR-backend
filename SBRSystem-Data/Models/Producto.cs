@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace SBRSystem_Data.Models;
@@ -16,8 +15,6 @@ public partial class Producto
 
     public int? UsuarioId { get; set; }
 
-    public BitArray? UnIngrediente { get; set; }
-
     public string? Origen { get; set; }
 
     public string? Estado { get; set; }
@@ -30,7 +27,9 @@ public partial class Producto
 
     public string? MaterialEmpaque { get; set; }
 
-    public BitArray? Nacional { get; set; }
+    public bool? Nacional { get; set; }
+
+    public bool? UnIngrediente { get; set; }
 
     public virtual EstadoFisico? EstadoFisico { get; set; }
 

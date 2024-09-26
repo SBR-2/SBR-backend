@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace SBRSystem_Data.Models;
@@ -19,8 +18,6 @@ public partial class Establecimiento
     public string? Telefono { get; set; }
 
     public DateTime? InicioOperaciones { get; set; }
-
-    public BitArray? NoSanitario { get; set; }
 
     public DateTime? VencimientoSanitario { get; set; }
 
@@ -43,6 +40,8 @@ public partial class Establecimiento
     public string? NombreDps { get; set; }
 
     public string? NombreDigemaps { get; set; }
+
+    public bool? NoSanitario { get; set; }
 
     public virtual ICollection<Ficha> Fichas { get; set; } = new List<Ficha>();
 }

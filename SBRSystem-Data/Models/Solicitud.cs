@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace SBRSystem_Data.Models;
@@ -14,15 +13,15 @@ public partial class Solicitud
 
     public DateTime? FechaCreacion { get; set; }
 
-    public BitArray? TitularRepresentacion { get; set; }
-
-    public BitArray? TitularFabricante { get; set; }
-
-    public BitArray? AcondicionadorDistinto { get; set; }
-
-    public BitArray? EsExportado { get; set; }
-
     public string? Estado { get; set; }
+
+    public bool? TitularRepresentacion { get; set; }
+
+    public bool? TitularFabricante { get; set; }
+
+    public bool? AcondicionadorDistinto { get; set; }
+
+    public bool? EsExportado { get; set; }
 
     public virtual ICollection<Documento> Documentos { get; set; } = new List<Documento>();
 

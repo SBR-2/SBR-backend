@@ -16,56 +16,58 @@ public partial class MySBRDbContext : DbContext
     {
     }
 
-    public DbSet<BpmCategorium> BpmCategoria { get; set; }
+    public virtual DbSet<BpmCategorium> BpmCategoria { get; set; }
 
-    public DbSet<BpmSubcategorium> BpmSubcategoria { get; set; }
+    public virtual DbSet<BpmSubcategorium> BpmSubcategoria { get; set; }
 
-    public DbSet<Documento> Documentos { get; set; }
+    public virtual DbSet<Documento> Documentos { get; set; }
 
-    public DbSet<Entidad> Entidads { get; set; }
+    public virtual DbSet<Entidad> Entidads { get; set; }
 
-    public DbSet<Establecimiento> Establecimientos { get; set; }
+    public virtual DbSet<Establecimiento> Establecimientos { get; set; }
 
-    public  DbSet<EstadoFisico> EstadoFisicos { get; set; }
+    public virtual DbSet<EstadoFisico> EstadoFisicos { get; set; }
 
-    public DbSet<Factor> Factors { get; set; }
+    public virtual DbSet<Factor> Factors { get; set; }
 
-    public DbSet<Ficha> Fichas { get; set; }
+    public virtual DbSet<Ficha> Fichas { get; set; }
 
-    public DbSet<Grupo> Grupos { get; set; }
+    public virtual DbSet<Grupo> Grupos { get; set; }
 
-    public DbSet<Opcion> Opcions { get; set; }
+    public virtual DbSet<Opcion> Opcions { get; set; }
 
-    public DbSet<Preguntum> Pregunta { get; set; }
+    public virtual DbSet<Preguntum> Pregunta { get; set; }
 
-    public DbSet<Producto> Productos { get; set; }
+    public virtual DbSet<Producto> Productos { get; set; }
 
-    public DbSet<ProductoEntidad> ProductoEntidads { get; set; }
+    public virtual DbSet<ProductoEntidad> ProductoEntidads { get; set; }
 
-    public DbSet<Registro> Registros { get; set; }
+    public virtual DbSet<Registro> Registros { get; set; }
 
-    public DbSet<Relacion> Relacions { get; set; }
+    public virtual DbSet<Relacion> Relacions { get; set; }
 
-    public DbSet<Respuestum> Respuesta { get; set; }
+    public virtual DbSet<Respuestum> Respuesta { get; set; }
 
-    public DbSet<Riesgo> Riesgos { get; set; }
+    public virtual DbSet<Riesgo> Riesgos { get; set; }
 
-    public DbSet<RiesgoCategorium> RiesgoCategoria { get; set; }
+    public virtual DbSet<RiesgoCategorium> RiesgoCategoria { get; set; }
 
-    public DbSet<RiesgoSubcategorium> RiesgoSubcategoria { get; set; }
+    public virtual DbSet<RiesgoSubcategorium> RiesgoSubcategoria { get; set; }
 
-    public DbSet<Rol> Rols { get; set; }
+    public virtual DbSet<Rol> Rols { get; set; }
 
-    public DbSet<Solicitud> Solicituds { get; set; }
+    public virtual DbSet<Solicitud> Solicituds { get; set; }
 
-    public DbSet<TipoDocumento> TipoDocumentos { get; set; }
+    public virtual DbSet<TipoDocumento> TipoDocumentos { get; set; }
 
-    public DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    public DbSet<Valor> Valors { get; set; }
+    public virtual DbSet<Valor> Valors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresEnum("estado_proceso", new[] { "En proceso", "Rechazada", "Aceptada", "archivado" });
+
         modelBuilder.Entity<BpmCategorium>(entity =>
         {
             entity.HasKey(e => e.BpmCategoriaId).HasName("bpm_categoria_pkey");
@@ -190,9 +192,7 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.Municipio)
                 .HasColumnType("character varying")
                 .HasColumnName("municipio");
-            entity.Property(e => e.NoSanitario)
-                .HasColumnType("bit(1)")
-                .HasColumnName("no_sanitario");
+            entity.Property(e => e.NoSanitario).HasColumnName("no_sanitario");
             entity.Property(e => e.Nombre)
                 .HasColumnType("character varying")
                 .HasColumnName("nombre");
@@ -231,6 +231,8 @@ public partial class MySBRDbContext : DbContext
 
             entity.ToTable("estado_fisico");
 
+            entity.HasIndex(e => e.EstadoFisico1, "estado_fisico_unique").IsUnique();
+
             entity.Property(e => e.EstadoFisicoId)
                 .HasDefaultValueSql("nextval('estado_fisico_id_seq'::regclass)")
                 .HasColumnName("estado_fisico_id");
@@ -238,6 +240,7 @@ public partial class MySBRDbContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("estado_fisico");
             entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("fecha_creacion");
         });
@@ -371,9 +374,7 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.MaterialEmpaque)
                 .HasColumnType("character varying")
                 .HasColumnName("material_empaque");
-            entity.Property(e => e.Nacional)
-                .HasColumnType("bit(1)")
-                .HasColumnName("nacional");
+            entity.Property(e => e.Nacional).HasColumnName("nacional");
             entity.Property(e => e.Nombre)
                 .HasColumnType("character varying")
                 .HasColumnName("nombre");
@@ -384,9 +385,7 @@ public partial class MySBRDbContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("presentaciones");
             entity.Property(e => e.RiesgoSubcategoriaId).HasColumnName("riesgo_subcategoria_id");
-            entity.Property(e => e.UnIngrediente)
-                .HasColumnType("bit(1)")
-                .HasColumnName("un_ingrediente");
+            entity.Property(e => e.UnIngrediente).HasColumnName("un_ingrediente");
             entity.Property(e => e.UsuarioId).HasColumnName("usuario_id");
 
             entity.HasOne(d => d.EstadoFisico).WithMany(p => p.Productos)
@@ -502,8 +501,10 @@ public partial class MySBRDbContext : DbContext
 
             entity.ToTable("riesgo");
 
+            entity.HasIndex(e => e.Riesgo1, "riesgo_unique").IsUnique();
+
             entity.Property(e => e.RiesgoId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('riesgo_id_seq'::regclass)")
                 .HasColumnName("riesgo_id");
             entity.Property(e => e.Estado).HasColumnName("estado");
             entity.Property(e => e.Riesgo1)
@@ -578,12 +579,8 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.SolicitudId)
                 .HasDefaultValueSql("nextval('solicitud_id_seq'::regclass)")
                 .HasColumnName("solicitud_id");
-            entity.Property(e => e.AcondicionadorDistinto)
-                .HasColumnType("bit(1)")
-                .HasColumnName("acondicionador_distinto");
-            entity.Property(e => e.EsExportado)
-                .HasColumnType("bit(1)")
-                .HasColumnName("es_exportado");
+            entity.Property(e => e.AcondicionadorDistinto).HasColumnName("acondicionador_distinto");
+            entity.Property(e => e.EsExportado).HasColumnName("es_exportado");
             entity.Property(e => e.Estado)
                 .HasColumnType("character varying")
                 .HasColumnName("estado");
@@ -594,12 +591,8 @@ public partial class MySBRDbContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("observaciones");
             entity.Property(e => e.ProductoId).HasColumnName("producto_id");
-            entity.Property(e => e.TitularFabricante)
-                .HasColumnType("bit(1)")
-                .HasColumnName("titular_fabricante");
-            entity.Property(e => e.TitularRepresentacion)
-                .HasColumnType("bit(1)")
-                .HasColumnName("titular_representacion");
+            entity.Property(e => e.TitularFabricante).HasColumnName("titular_fabricante");
+            entity.Property(e => e.TitularRepresentacion).HasColumnName("titular_representacion");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.Solicituds)
                 .HasForeignKey(d => d.ProductoId)

@@ -17,8 +17,12 @@ builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddMutationType<Mutations>()
+    .AddTypes()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting()
+    .AddAuthorization()
+    .AddMutationConventions()
     .RegisterDbContext<MySBRDbContext>();
     
 

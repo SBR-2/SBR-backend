@@ -9,6 +9,7 @@ using HotChocolate.Types;
 
 namespace SBRSystem_API.GraphQl;
 
+[MutationType]
 public class Mutations
 {
 
