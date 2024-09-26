@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SBRSystem_API.GraphQl;
 using SBRSystem_Data.Context;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
