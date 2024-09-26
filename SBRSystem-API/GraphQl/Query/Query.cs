@@ -1,8 +1,7 @@
 using SBRSystem_Data.Context;
-using SBRSystem_Data.DTO;
 using SBRSystem_Data.Models;
 
-namespace SBRSystem_API.GraphQl;
+namespace SBRSystem_API.GraphQl.Query;
 
 [QueryType]
 public static class Query
