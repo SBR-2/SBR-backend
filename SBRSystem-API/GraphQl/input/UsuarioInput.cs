@@ -16,6 +16,8 @@ public class AddUsuarioInput
     public string Estado { get; set; }
     //public DateTime FechaCreacion { get; set; }
     public string Salt { get; set; }
+
+    public string Correo { get; set; }
 }
 
 public class UpdateUsuarioInput
@@ -26,6 +28,7 @@ public class UpdateUsuarioInput
     public string Estado { get; set; }
     //public DateTime FechaCreacion { get; set; }
     public string Salt { get; set; }
+    public string Correo { get; set; }
 }
 
 public class DeleteUsuarioInput

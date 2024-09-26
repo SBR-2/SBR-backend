@@ -64,6 +64,7 @@ public partial class MySBRDbContext : DbContext
 
     public virtual DbSet<Valor> Valors { get; set; }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasPostgresEnum("estado_proceso", new[] { "En proceso", "Rechazada", "Aceptada", "archivado" });
@@ -639,9 +640,14 @@ public partial class MySBRDbContext : DbContext
 
             entity.ToTable("usuario");
 
+            entity.HasIndex(e => e.Correo, "usuario_unique").IsUnique();
+
             entity.Property(e => e.UsuarioId)
                 .HasDefaultValueSql("nextval('usuario_id_seq'::regclass)")
                 .HasColumnName("usuario_id");
+            entity.Property(e => e.Correo)
+                .HasColumnType("character varying")
+                .HasColumnName("correo");
             entity.Property(e => e.Estado)
                 .HasColumnType("character varying")
                 .HasColumnName("estado");
@@ -682,7 +688,9 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.NomenclaturaValor)
                 .HasColumnType("character varying")
                 .HasColumnName("nomenclatura_valor");
-            entity.Property(e => e.Puntos).HasColumnName("puntos");
+            entity.Property(e => e.Puntos)
+                .HasPrecision(2, 1)
+                .HasColumnName("puntos");
         });
         modelBuilder.HasSequence("bpm_categoria_id_seq");
         modelBuilder.HasSequence("bpm_subcategoria_id_seq");
