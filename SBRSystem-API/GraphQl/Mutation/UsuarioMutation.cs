@@ -35,12 +35,12 @@ namespace SBRSystem_API.GraphQl;
             
             try
             {
-                // Guardar los cambios en la BD
+                
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
-                // Aquí puedes ver la inner exception para los detalles de los errores
+                
                 var innerExceptionMessage = ex.InnerException?.Message;
                 throw new Exception($"Error saving changes to database: {innerExceptionMessage}", ex);
             }
@@ -72,7 +72,6 @@ namespace SBRSystem_API.GraphQl;
             usuario.Salt = input.Salt;
             usuario.FechaCreacion = DateTime.Now;
 
-            //usuario.FechaCreacion = DateTime.SpecifyKind(input.FechaCreacion, DateTimeKind.Unspecified);
 
             context.Usuarios.Update(usuario);
 
@@ -104,12 +103,12 @@ namespace SBRSystem_API.GraphQl;
                 throw new GraphQLException("El usuario no existe");
             }
 
-            // Cambiamos el estado a "false"
+            
             usuario.Estado = "false";
 
             try
             {
-                // Hacer guardar los cambios
+                
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)

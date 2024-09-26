@@ -12,7 +12,6 @@ public class AddRolInput
 {
     public string RolId { get; set; }
     public string Rol1 { get; set; }
-    //public DateTime? FechaCreacion { get; set; }
 }
 
 public class DeleteRolInput

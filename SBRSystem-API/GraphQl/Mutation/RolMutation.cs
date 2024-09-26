@@ -21,11 +21,11 @@ namespace SBRSystem_API.GraphQl;
                 throw new GraphQLException("This role already exists.");
             }
 
-            // Crea el nuevo rol
+            
             var rol = new Rol
             {
                 RolId = input.RolId,
-                Rol1 = input.Rol1,  // Usamos input.Rol1 aquí
+                Rol1 = input.Rol1,  // Usamos input.Rol1 aquí para no repetir el nombre de la clase
                 FechaCreacion = DateTime.Now
             };
 
@@ -51,14 +51,14 @@ namespace SBRSystem_API.GraphQl;
             {
                 throw new GraphQLException("Role not found.");
             }
-    
-            // Eliminar el rol
+
+            
             context.Rols.Remove(rol);
-    
+
             try
             {
                 await context.SaveChangesAsync();
-                return true;  // Si la eliminación fue exitosa, devolvemos true
+                return true;  //Se elimino exitosamente 
             }
             catch (DbUpdateException ex)
             {
