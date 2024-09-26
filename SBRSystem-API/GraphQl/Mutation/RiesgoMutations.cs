@@ -10,7 +10,7 @@ using HotChocolate.Types;
 namespace SBRSystem_API.GraphQl;
 
 [MutationType]
-public class Mutations
+public class RiesgoMutations
 {
 
     public async Task<RiesgoDto> AddRiesgoAsync(AddRiesgoInput input, [Service] MySBRDbContext context)
