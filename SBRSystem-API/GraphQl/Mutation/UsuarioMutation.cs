@@ -14,11 +14,11 @@ namespace SBRSystem_API.GraphQl;
         public async Task<Usuario> AddUsuario(AddUsuarioInput input, [Service] MySBRDbContext context)
         {
             // Validar si ya existe un usuario con ese nombre
-            var existingUsuario = await context.Usuarios.FirstOrDefaultAsync(u => u.Nombre == input.Nombre);
+            var existingUsuario = await context.Usuarios.FirstOrDefaultAsync(u => u.Correo == input.Correo);
 
             if(existingUsuario != null)
             {
-                throw new GraphQLException("This username already exist");
+                throw new GraphQLException("This email has been used");
             }
             
             var usuario = new Usuario
@@ -28,6 +28,7 @@ namespace SBRSystem_API.GraphQl;
                 Salt = input.Salt,
                 RolId = input.RolId,
                 Estado = input.Estado,
+                Correo = input.Correo,
                 FechaCreacion = DateTime.Now
             };
 
@@ -58,11 +59,11 @@ namespace SBRSystem_API.GraphQl;
             }
 
             var existingUsuario = await context.Usuarios
-                .FirstOrDefaultAsync(u => u.Nombre == input.Nombre && u.UsuarioId != usuarioId);
+                .FirstOrDefaultAsync(u => u.Correo == input.Correo && u.UsuarioId != usuarioId);
 
             if(existingUsuario != null)
             {
-                throw new GraphQLException("This username already exist");
+                throw new GraphQLException("This email already exist");
             }
 
             usuario.Nombre = input.Nombre;
@@ -70,6 +71,7 @@ namespace SBRSystem_API.GraphQl;
             usuario.RolId = input.RolId;
             usuario.Estado = input.Estado;
             usuario.Salt = input.Salt;
+            usuario.Correo = input.Correo;
             usuario.FechaCreacion = DateTime.Now;
 
 
