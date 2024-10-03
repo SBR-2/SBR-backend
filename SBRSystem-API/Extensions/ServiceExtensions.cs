@@ -11,7 +11,7 @@ public static class ServiceExtensions
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File("logfile.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                 
                 .CreateLogger();
 

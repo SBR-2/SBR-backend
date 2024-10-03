@@ -90,6 +90,7 @@ public class BpmInpeccionMutation
         {
             context.BpmSubcategoria.Add(newBpmSubcategoria);
             context.SaveChanges();
+            Log.Information($"Categoria: -{newBpmSubcategoria.Nombre}- agregado correctamente");
 
         }
         catch (Exception e)
