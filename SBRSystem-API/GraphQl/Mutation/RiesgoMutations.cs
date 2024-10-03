@@ -1,13 +1,10 @@
-﻿using System;
-using HotChocolate;
-using SBRSystem_Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SBRSystem_API.GraphQl.input;
+using SBRSystem_Data.Context;
 using SBRSystem_Data.DTO;
 using SBRSystem_Data.Models;
-using Microsoft.EntityFrameworkCore;
-using SBRSystem_Data.Context;
-using HotChocolate.Types;
 
-namespace SBRSystem_API.GraphQl;
+namespace SBRSystem_API.GraphQl.Mutation;
 
 [MutationType]
 public class RiesgoMutations
