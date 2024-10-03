@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SBRSystem_API.GraphQl.input;
 using SBRSystem_Data.Context;
 using SBRSystem_Data.Models;
+using Serilog;
 using GraphQLException = HotChocolate.GraphQLException;
 
 namespace SBRSystem_API.GraphQl.Mutation;
@@ -58,6 +59,7 @@ public class BpmInpeccionMutation
         {
             context.BpmCategoria.Add(newBpmcategoria);
             context.SaveChanges();
+            Log.Information($"Categoria: -{newBpmcategoria.Nombre}- agregado correctamente");
 
         }
         catch (Exception e)

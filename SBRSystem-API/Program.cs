@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SBRSystem_API.Extensions;
 using SBRSystem_API.GraphQl;
 using SBRSystem_Data.Context;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // builder.Services.AddControllers();
+builder.Services.ConfigurarLogger();
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;"));
