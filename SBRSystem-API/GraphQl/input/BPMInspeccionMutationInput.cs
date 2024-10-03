@@ -85,9 +85,8 @@ public class AddEstablecimientoInput
 
     public string  Numero { get; set; }
 
-    public string  Municipio { get; set; }
+    public int  Municipio_id { get; set; }
 
-    public string  Provincia { get; set; }
 
     public string  Telefono { get; set; }
 
@@ -103,7 +102,7 @@ public class AddEstablecimientoInput
 
     public string  Comercializacion { get; set; }
 
-    public string  MercadoObjetivo { get; set; }
+    public int MercadoObjetivo_id { get; set; }
 
     public int  NumEmpleados { get; set; }
 

@@ -11,9 +11,7 @@ public partial class Establecimiento
 
     public string? Numero { get; set; }
 
-    public string? Municipio { get; set; }
-
-    public string? Provincia { get; set; }
+    public int? MunicipioId { get; set; }
 
     public string? Telefono { get; set; }
 
@@ -29,7 +27,7 @@ public partial class Establecimiento
 
     public string? Comercializacion { get; set; }
 
-    public string? MercadoObjetivo { get; set; }
+    public int? MercadoObjetivoId { get; set; }
 
     public int? NumEmpleados { get; set; }
 
@@ -44,4 +42,8 @@ public partial class Establecimiento
     public bool? NoSanitario { get; set; }
 
     public virtual ICollection<Ficha> Fichas { get; set; } = new List<Ficha>();
+
+    public virtual MercadoObjetivo? MercadoObjetivo { get; set; }
+
+    public virtual Municipio? Municipio { get; set; }
 }

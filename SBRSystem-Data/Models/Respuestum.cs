@@ -17,6 +17,8 @@ public partial class Respuestum
 
     public bool? Estado { get; set; }
 
+    public string? Observacion { get; set; }
+
     public virtual Ficha? Ficha { get; set; }
 
     public virtual Preguntum? Pregunta { get; set; }

@@ -166,7 +166,7 @@ public class BpmInpeccionMutation
        {
            SolicitudId = input.SolicitudId,
            EstablecimientoId = input.EstablecimientoId,
-           Fecha = input.Fecha,
+           FechaElaboracion = input.Fecha,
            Estado = input.Estado,
        };
 
@@ -218,8 +218,7 @@ public class BpmInpeccionMutation
        {
            Nombre = input.Nombre,
            Numero = input.Numero,
-           Municipio = input.Municipio,
-           Provincia = input.Provincia,
+           MunicipioId = input.Municipio_id,
            Telefono = input.Telefono,
            InicioOperaciones = input.InicioOperaciones,
            VencimientoSanitario = input.VencimientoSanitario,
@@ -227,7 +226,7 @@ public class BpmInpeccionMutation
            NumProductosElaborados = input.NumProductosElaborados,
            ProduccionAnual = input.ProduccionAnual,
            Comercializacion = input.Comercializacion,
-           MercadoObjetivo = input.MercadoObjetivo,
+           MercadoObjetivoId = input.MercadoObjetivo_id,
            NumEmpleados = input.NumEmpleados,
            UltimaInspeccion = input.UltimaInspeccion,
            CalUltimaInspeccion = input.CalUltimaInspeccion,

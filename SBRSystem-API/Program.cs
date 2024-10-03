@@ -23,7 +23,6 @@ builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("
 builder.Services.AddHttpContextAccessor();
 
 
-builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;"));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options => 
