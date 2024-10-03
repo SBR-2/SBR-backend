@@ -6,18 +6,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-// builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
+
+
 builder.Services.AddDbContextPool<MySBRDbContext>(options => options.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;"));
 
-//Agregar servicios para autenticacion JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options => 
 {
@@ -33,27 +29,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
-
+// Configurar GraphQL
 builder.Services
     .AddGraphQLServer()
     .AddTypes()
     .AddProjections()
     .AddFiltering()
     .AddSorting()
-    .AddAuthorization() 
+    .AddAuthorization()
     .AddMutationConventions()
     .RegisterDbContext<MySBRDbContext>();
 
-
 var app = builder.Build();
-
-
 
 // Middleware de autenticación y autorización
 app.UseAuthentication(); // Agregar autenticación JWT
 app.UseAuthorization();  // Agregar autorización
 
-// Configure the HTTP request pipeline.
+// Configuración del pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     // app.UseSwagger();
@@ -62,7 +55,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-
-// app.MapControllers();
+// Mapear el endpoint de GraphQL
 app.MapGraphQL("/graphql");
+
 app.Run();

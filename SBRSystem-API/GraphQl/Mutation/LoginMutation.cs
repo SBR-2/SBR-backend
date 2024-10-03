@@ -10,79 +10,73 @@ using System.Security.Cryptography;
 
 namespace SBRSystem_API.GraphQl
 {
-
-[MutationType]
-public class LoginMutation
-{
-
-    [AllowAnonymous]
-    public LoginResponse Login(LoginInput input, [Service] MySBRDbContext context)
+    [MutationType]
+    public class LoginMutation
     {
-        try
+        [AllowAnonymous]
+        public LoginResponse Login(LoginInput input, [Service] MySBRDbContext context)
         {
-            // Buscar al usuario por su nombre
-            var user = context.Usuarios.FirstOrDefault(u => u.Nombre == input.Username);
-
-            if (user == null)
+            try
             {
-                return new LoginResponse { Token = null, Message = "Credenciales inválidas" }; // El token es nulo si falla el login
-            }
+                // Buscar el usuario por su correo electrónico
+                var user = context.Usuarios.FirstOrDefault(u => u.Correo == input.Email);
 
-            // Generar el hash de la contraseña ingresada usando el salt almacenado
-            var passwordService = new PasswordService();
-            var hash = passwordService.ComputeHash(input.Password, user.Salt);
-
-            // Comparar el Hash
-            if (user.Hash != hash)
-            {
-                return new LoginResponse { Token = null, Message = "Credenciales inválidas" }; // El token es nulo si falla el login
-            }
-
-            var role = user.RolId switch
-            {
-                "1" => "Admin",
-                "2" => "User",
-                "3" => "Inspector",
-                "4" => "Evaluator",
-                "5" => "Solicitante",
-                _ => "Unknown"
-            };
-
-            // Generar el token JWT si las credenciales son válidas
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("aVeryLongSecretKeyForJWTTokenThatIsAtLeast32Chars");
-            var securityToken = new JwtSecurityToken(
-                issuer: "SBRSystem",
-                audience: "APIUsers",
-                claims: [
-                    new Claim(ClaimTypes.Role, "Admin")
-                ],
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), "HS256"),
-                expires: DateTime.Now.AddDays(10)
-            );
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
+                if (user == null)
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.UsuarioId.ToString()),
-                    new Claim(ClaimTypes.Role, role)
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), "HS256"),
-                Issuer = "SBRSystem",
-                Audience = "APIUsers"
-            };
+                    return new LoginResponse { Token = null, Message = "Credenciales inválidas" }; // El token es nulo si falla el login
+                }
 
-            var token = tokenHandler.WriteToken(securityToken);
-            return new LoginResponse { Token = tokenHandler.WriteToken(securityToken), Message = "Login exitoso" }; // Retorna token y mensaje de éxito
-        }
-        catch (Exception ex)
-        {
-            // Manejar cualquier error inesperado
-            Console.WriteLine($"Error durante el login: {ex.Message}");
-            return new LoginResponse { Token = null, Message = "Ocurrió un error en el proceso de login." }; // El token es nulo en caso de error
+                var passwordService = new PasswordService();
+                var hash = passwordService.ComputeHash(input.Password, user.Salt);
+
+
+                if (user.Hash != hash)
+                {
+                    return new LoginResponse { Token = null, Message = "Credenciales inválidas" }; 
+                }
+
+
+                var validRoles = new Dictionary<string, string>
+                {
+                    { "1", "Admin" },
+                    { "2", "User" },
+                    { "3", "Inspector" },
+                    { "4", "Evaluator" },
+                    { "5", "Applicant" }
+                };
+
+                // Validar el RolId del usuario
+                if (!validRoles.TryGetValue(user.RolId, out var role))
+                {
+                    return new LoginResponse { Token = null, Message = "El rol del usuario no es válido." };
+                }
+
+                // Generar el token JWT si las credenciales y el rol son válidos
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes("aVeryLongSecretKeyForJWTTokenThatIsAtLeast32Chars");
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.UsuarioId.ToString()),
+                        new Claim(ClaimTypes.Role, role)
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                    Issuer = "SBRSystem",
+                    Audience = "APIUsers"
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return new LoginResponse { Token = tokenHandler.WriteToken(token), Message = "Login exitoso" }; // Retorna token y mensaje de éxito
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier error inesperado
+                Console.WriteLine($"Error durante el login: {ex.Message}");
+                return new LoginResponse { Token = null, Message = "Ocurrió un error en el proceso de login." }; // El token es nulo en caso de error
+            }
         }
     }
-}
-
 }
