@@ -29,6 +29,8 @@ public class BpmInpeccionMutation
         {
             context.Grupos.Add(newGrupo);
             context.SaveChanges();
+            Log.Information($"Categoria: -{newGrupo.Nombre}- agregado correctamente");
+            
 
         }
         catch (Exception e)
@@ -121,6 +123,7 @@ public class BpmInpeccionMutation
         {
             context.Pregunta.Add(newPregunta);
             context.SaveChanges();
+            Log.Information($"Categoria: -{newPregunta.Nombre}- agregado correctamente");
 
         }
         catch (Exception e)
@@ -237,6 +240,8 @@ public class BpmInpeccionMutation
        {
            context.Establecimientos.Add(newEstablecimiento);
            context.SaveChanges();
+                       Log.Information($"Categoria: -{newEstablecimiento.Nombre}- agregado correctamente");
+
 
        }
        catch (Exception e)
