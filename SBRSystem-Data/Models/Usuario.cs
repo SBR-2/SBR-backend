@@ -19,6 +19,8 @@ public partial class Usuario
 
     public string? Salt { get; set; }
 
+    public string Correo { get; set; } = null!;
+
     public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
 
     public virtual Rol? Rol { get; set; }

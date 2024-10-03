@@ -7,7 +7,7 @@ using SBRSystem_Data.Models;
 namespace SBRSystem_API.GraphQl.Mutation;
 
 [MutationType]
-public class Mutations
+public class RiesgoMutations
 {
 
     public async Task<RiesgoDto> AddRiesgoAsync(AddRiesgoInput input, [Service] MySBRDbContext context)

@@ -9,7 +9,7 @@ public partial class Valor
 
     public string? NomenclaturaValor { get; set; }
 
-    public int? Puntos { get; set; }
+    public decimal? Puntos { get; set; }
 
     public string? Descripcion { get; set; }
 
