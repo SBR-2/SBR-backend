@@ -15,6 +15,8 @@ public partial class Documento
 
     public string? Estado { get; set; }
 
+    public virtual ICollection<ComentarioDocumento> ComentarioDocumentos { get; set; } = new List<ComentarioDocumento>();
+
     public virtual Solicitud? Solicitud { get; set; }
 
     public virtual TipoDocumento? TipoDocumento { get; set; }

@@ -13,5 +13,7 @@ public partial class Factor
 
     public bool? Estado { get; set; }
 
+    public float? Peso { get; set; }
+
     public virtual ICollection<Opcion> Opcions { get; set; } = new List<Opcion>();
 }

@@ -39,7 +39,7 @@ namespace SBRSystem_API.GraphQl;
             else
             {
                 
-                var userRole = user.FindFirst("role")?.Value;
+                var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
 
                 if (userRole == "Admin")
                 {
@@ -67,7 +67,8 @@ namespace SBRSystem_API.GraphQl;
                 RolId = rolId, 
                 Estado = "true", // Estado siempre "true" hasta que el user haya sido eliminado
                 Correo = input.Correo,
-                FechaCreacion = DateTime.Now
+                FechaCreacion = DateTime.Now,
+                EntidadId = input.EntidadId
             };
 
             context.Usuarios.Add(usuario);

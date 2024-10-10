@@ -166,7 +166,6 @@ public class BpmInpeccionMutation
        {
            SolicitudId = input.SolicitudId,
            EstablecimientoId = input.EstablecimientoId,
-           Fecha = input.Fecha,
            Estado = input.Estado,
        };
 
@@ -219,7 +218,6 @@ public class BpmInpeccionMutation
            Nombre = input.Nombre,
            Numero = input.Numero,
            Municipio = input.Municipio,
-           Provincia = input.Provincia,
            Telefono = input.Telefono,
            InicioOperaciones = input.InicioOperaciones,
            VencimientoSanitario = input.VencimientoSanitario,

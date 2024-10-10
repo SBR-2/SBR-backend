@@ -1,3 +1,5 @@
+using SBRSystem_Data.Models;
+
 namespace SBRSystem_API.GraphQl.input;
 
 public class AddGrupoInput
@@ -62,8 +64,6 @@ public class AddFichaInput
 
     public int EstablecimientoId { get; set; }
 
-    public DateTime Fecha { get; set; }
-
     public bool Estado { get; set; }
 }
 
@@ -85,9 +85,7 @@ public class AddEstablecimientoInput
 
     public string  Numero { get; set; }
 
-    public string  Municipio { get; set; }
-
-    public string  Provincia { get; set; }
+    public Municipio  Municipio { get; set; }
 
     public string  Telefono { get; set; }
 
@@ -103,7 +101,7 @@ public class AddEstablecimientoInput
 
     public string  Comercializacion { get; set; }
 
-    public string  MercadoObjetivo { get; set; }
+    public MercadoObjetivo  MercadoObjetivo { get; set; }
 
     public int  NumEmpleados { get; set; }
 
