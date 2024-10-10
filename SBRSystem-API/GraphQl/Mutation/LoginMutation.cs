@@ -46,7 +46,7 @@ namespace SBRSystem_API.GraphQl
                 };
 
                 // Validar el RolId del usuario
-                if (!validRoles.TryGetValue(user.RolId, out var role))
+                if (!validRoles.TryGetValue(user.RolId.ToString(), out var role))
                 {
                     return new LoginResponse { Token = null, Message = "El rol del usuario no es válido." };
                 }

@@ -225,7 +225,7 @@ public class BpmInpeccionMutation
            NumProductosElaborados = input.NumProductosElaborados,
            ProduccionAnual = input.ProduccionAnual,
            Comercializacion = input.Comercializacion,
-           MercadoObjetivo = input.MercadoObjetivo,
+           MercadoObjetivoId = input.MercadoObjetivo_id,
            NumEmpleados = input.NumEmpleados,
            UltimaInspeccion = input.UltimaInspeccion,
            CalUltimaInspeccion = input.CalUltimaInspeccion,
