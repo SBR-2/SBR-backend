@@ -1,3 +1,5 @@
+using SBRSystem_Data.Models;
+
 namespace SBRSystem_API.GraphQl.input;
 
 public class AddProductoInput
@@ -24,6 +26,9 @@ public class AddProductoInput
     public bool? Nacional{ get; set; }
     [GraphQLNonNullType]
     public bool? UnIngrediente{ get; set; }
+
+    public ICollection<ProductoEntidad> ProductoEntidades{get;set;}
+
 }
 
 

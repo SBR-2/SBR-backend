@@ -227,7 +227,7 @@ public class BpmInpeccionMutation
            ProduccionAnual = input.ProduccionAnual,
            Comercializacion = input.Comercializacion,
            MercadoObjetivoId = input.MercadoObjetivo_id,
-           NumEmpleados = input.NumEmpleados,
+            NumEmpleados = input.NumEmpleados,
            UltimaInspeccion = input.UltimaInspeccion,
            CalUltimaInspeccion = input.CalUltimaInspeccion,
            NombreDps = input.NombreDps,
@@ -252,9 +252,4 @@ public class BpmInpeccionMutation
            x.Rnc== input.Rnc);
 
    }
-   
-   
-   
-   
-   
 }
