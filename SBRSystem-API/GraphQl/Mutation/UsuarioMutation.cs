@@ -15,7 +15,7 @@ namespace SBRSystem_API.GraphQl;
     public class UsuarioMutation
     {
        
-        public async Task<Usuario> AddUsuario(AddUsuarioInput input, [Service] MySBRDbContext context, ClaimsPrincipal user)
+        public async Task<Usuario> AddUsuario(AddUsuarioInput input, [Service] MySBRDbContext context, ClaimsPrincipal user)     
         {
             // Validar si ya existe un usuario con ese correo
             var existingUsuario = await context.Usuarios.FirstOrDefaultAsync(u => u.Correo == input.Correo);
@@ -38,25 +38,22 @@ namespace SBRSystem_API.GraphQl;
             }
             else
             {
-                
                 var userRole = user.FindFirst("role")?.Value;
 
                 if (userRole == "Admin")
                 {
-                    
                     rolId = input.RolId ?? "2";
                 }
                 else
                 {
-                    
                     if (!string.IsNullOrEmpty(input.RolId))
                     {
                         throw new GraphQLException("No tienes autorización para asignar rol.");
                     }
-                    // Si no está intentando asignar un rol, le damos el rol por defecto "Solicitante"
                     rolId = "5";
                 }
             }
+
 
             
             var usuario = new Usuario
