@@ -7,7 +7,6 @@ namespace SBRSystem_API.GraphQl.Query;
 [QueryType]
 public static class Query
 {
-    [Authorize(Roles = ["Admin"])]
     [UseOffsetPaging]
     [UseProjection]
     [UseFiltering]
