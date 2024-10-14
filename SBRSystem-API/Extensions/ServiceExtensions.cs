@@ -16,4 +16,24 @@ public static class ServiceExtensions
                 .CreateLogger();
 
         }
+        
+        public static void ConfigurarCORS(this IServiceCollection services, string MyAllowSpecifiOrigins)
+        {
+            string[] domains = {  "http://localhost:4000",  };
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecifiOrigins,
+                    policy =>
+                    {
+                        policy.WithOrigins(domains)
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+        }
+        
+        
 }

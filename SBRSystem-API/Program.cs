@@ -14,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // builder.Services.AddControllers();
+var MyAllowSpecifiOrigins = "_MyAllowSpecifiOrigins";
+builder.Services.ConfigurarCORS(MyAllowSpecifiOrigins);
+
 builder.Services.ConfigurarLogger();
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -68,4 +71,5 @@ if (app.Environment.IsDevelopment())
 // Mapear el endpoint de GraphQL
 app.MapGraphQL("/graphql");
 
+app.UseCors(MyAllowSpecifiOrigins);
 app.Run();
