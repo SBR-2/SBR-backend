@@ -23,7 +23,7 @@ namespace SBRSystem_API.GraphQl
 
                 if (user == null)
                 {
-                    return new LoginResponse { Token = null, Message = "Credenciales inválidas" }; // El token es nulo si falla el login
+                    return new LoginResponse { Token = null, Message = "Credenciales inválidas", UserId = null }; 
                 }
 
                 var passwordService = new PasswordService();
@@ -45,10 +45,11 @@ namespace SBRSystem_API.GraphQl
                     { "5", "Applicant" }
                 };
 
+                //CHEQUEAR ESTO
                 // Validar el RolId del usuario
                 if (!validRoles.TryGetValue(user.RolId.ToString(), out var role))
                 {
-                    return new LoginResponse { Token = null, Message = "El rol del usuario no es válido." };
+                    return new LoginResponse { Token = null, Message = "El rol del usuario no es válido.", UserId = null };
                 }
 
                 // Generar el token JWT si las credenciales y el rol son válidos
@@ -69,7 +70,11 @@ namespace SBRSystem_API.GraphQl
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return new LoginResponse { Token = tokenHandler.WriteToken(token), Message = "Login exitoso" }; // Retorna token y mensaje de éxito
+                return new LoginResponse { 
+                    Token = tokenHandler.WriteToken(token), 
+                    Message = "Login exitoso",
+                    UserId = user.UsuarioId.ToString()
+                }; 
             }
             catch (Exception ex)
             {

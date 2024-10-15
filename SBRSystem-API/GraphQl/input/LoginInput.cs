@@ -1,10 +1,3 @@
-using HotChocolate;
-using SBRSystem_Data;
-using SBRSystem_Data.DTO;
-using SBRSystem_Data.Models;
-using Microsoft.EntityFrameworkCore;
-using SBRSystem_Data.Context;
-using HotChocolate.Types;
 
 namespace SBRSystem_API.GraphQl;
 
@@ -15,8 +8,16 @@ public class LoginInput
 
 }
 
-    public class LoginResponse
+public class LoginResponse
 {
     public string? Token { get; set; } 
     public string Message { get; set; }
+    public string UserId {get; set; }
+}
+
+public class GetUserIdResponse
+{
+    public string? Token { get; set; } 
+    public string Message { get; set; }
+    public string UserId {get; set; }
 }
