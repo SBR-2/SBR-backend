@@ -1,10 +1,3 @@
-using HotChocolate;
-using SBRSystem_Data;
-using SBRSystem_Data.DTO;
-using SBRSystem_Data.Models;
-using Microsoft.EntityFrameworkCore;
-using SBRSystem_Data.Context;
-using HotChocolate.Types;
 
 namespace SBRSystem_API.GraphQl;
 
