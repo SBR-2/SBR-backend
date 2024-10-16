@@ -27,7 +27,7 @@ public static class Query
     public static async Task<IQueryable<BpmSubcategorium>> GetBpmSubcategoria(MySBRDbContext context)
         => context.BpmSubcategoria;
 
-    [UseOffsetPaging]
+    [UsePaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
