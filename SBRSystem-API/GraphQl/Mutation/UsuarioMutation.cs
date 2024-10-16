@@ -97,7 +97,7 @@ namespace SBRSystem_API.GraphQl;
             }
 
             // Si el usuario autenticado no es administrador, verificar que está actualizando su propia cuenta
-            var userRole = user.FindFirst("role")?.Value;
+            var userRole = user.FindFirst(ClaimTypes.Role)?.Value;
             var authenticatedUserId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (userRole != "Admin" && authenticatedUserId != usuario.UsuarioId.ToString())
