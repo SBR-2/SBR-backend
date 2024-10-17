@@ -160,17 +160,19 @@ public class BpmInpeccionMutation
             EstablecimientoId = input.EstablecimientoId,
             Estado = input.Estado,
             FechaElaboracion = DateTime.Now,
-            FechaRevision = null,
             Latitud = "-19.3434",
             Longitud = "12.324",
+            NombreDps = input.NombreDps,
+            NombreDigemaps = input.NombreDigemaps,
+
+            FechaRevision = null,
             FechaAprobacion = null,
             Calificacion = null,
+            MatizRiesgo = null,
+
             InspectorId = null,
             RevisorId = null,
             AprobadorId = null,
-            NombreDps = null,
-            NombreDigemaps = null,
-            MatizRiesgo = 0,
             EvaluadorId = null,
         };
 
@@ -187,6 +189,32 @@ public class BpmInpeccionMutation
         return context.Fichas.First(x =>
             x.SolicitudId == input.SolicitudId && x.EstablecimientoId == input.EstablecimientoId);
     }
+
+
+    public async Task<Ficha> UpdateFicha(UpdateFichaInput input, [Service] MySBRDbContext context)
+    {
+        Ficha? objFicha = context.Fichas.FirstOrDefault(x => x.FichaId == input.FichaId);
+        if (objFicha == null)
+        {
+            Log.Error($"Error update en ficha-{input.FichaId}");
+            throw new Exception($"Error update en ficha-{input.FichaId}");
+        }
+
+        objFicha.FechaRevision = input.FechaRevision;
+        objFicha.FechaAprobacion = input.FechaAprobacion;
+        objFicha.Calificacion = input.Calificacion;
+        objFicha.InspectorId = input.InspectorId;
+        objFicha.RevisorId = input.RevisorId;
+        objFicha.AprobadorId = input.AprobadorId;
+        objFicha.MatizRiesgo = input.MatizRiesgo;
+        objFicha.EvaluadorId = input.EvaluadorId;
+
+        context.SaveChanges();
+        Log.Information("Ficha-{P1} actualizada!", objFicha.FichaId);
+
+        return objFicha;
+    }
+
 
     public async Task<Valor> AddValor(AddValorInput input, [Service] MySBRDbContext context)
     {

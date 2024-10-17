@@ -35,7 +35,7 @@ public partial class Ficha
 
     public string? NombreDigemaps { get; set; }
 
-    public int MatizRiesgo { get; set; }
+    public int? MatizRiesgo { get; set; }
 
     public int? EvaluadorId { get; set; }
 
@@ -49,7 +49,7 @@ public partial class Ficha
 
     public virtual Usuario? Inspector { get; set; }
 
-    public virtual MatizRiesgo MatizRiesgoNavigation { get; set; } = null!;
+    public virtual MatizRiesgo? MatizRiesgoNavigation { get; set; }
 
     public virtual ICollection<Respuestum> Respuesta { get; set; } = new List<Respuestum>();
 

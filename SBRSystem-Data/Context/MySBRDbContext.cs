@@ -398,6 +398,7 @@ public partial class MySBRDbContext : DbContext
 
             entity.HasOne(d => d.MatizRiesgoNavigation).WithMany(p => p.Fichas)
                 .HasForeignKey(d => d.MatizRiesgo)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("matiz_riesgo_fk");
 
             entity.HasOne(d => d.Revisor).WithMany(p => p.FichaRevisors)
