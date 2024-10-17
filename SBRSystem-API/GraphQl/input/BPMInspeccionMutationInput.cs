@@ -50,11 +50,25 @@ public class AddRespuestaInput
 
 public class AddFichaInput
 {
-    public int SolicitudId { get; set; }
+    public int? SolicitudId { get; set; }
+    public int? EstablecimientoId { get; set; }
 
-    public int EstablecimientoId { get; set; }
+    public bool? Estado { get; set; }
+    public string? NombreDps { get; set; }
+    public string? NombreDigemaps { get; set; }
+}
 
-    public bool Estado { get; set; }
+public class UpdateFichaInput
+{
+    public int FichaId { get; set; }
+    public DateTime? FechaRevision { get; set; }
+    public DateTime? FechaAprobacion { get; set; }
+    public float? Calificacion { get; set; }
+    public int? InspectorId { get; set; }
+    public int? RevisorId { get; set; }
+    public int? AprobadorId { get; set; }
+    public int? MatizRiesgo { get; set; }
+    public int? EvaluadorId { get; set; }
 }
 
 public class AddValorInput
