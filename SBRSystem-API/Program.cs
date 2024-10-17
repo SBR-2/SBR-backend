@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
+using HotChocolate.Types.Pagination;
 using SBRSystem_Data.DTO;
 using SBRSystem_Entities.Contracts;
 using SBRSystem_Entities.Repository;
@@ -58,6 +59,12 @@ builder.Services
     .AddSorting()
     .AddAuthorization()
     .AddMutationConventions()
+    .SetPagingOptions(new PagingOptions
+        {
+            DefaultPageSize = 50,  // Increase the default page size from 10 to 50
+            MaxPageSize = 200,     // Set a maximum page size
+            IncludeTotalCount = true // Optionally include total count of records
+        })
     .AddType<UploadType>()
     .RegisterDbContext<MySBRDbContext>();
 
