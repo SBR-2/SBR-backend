@@ -12,7 +12,6 @@ public class AddEntidadInput
     public string? Correo { get; set; }
     [GraphQLNonNullType]
     public string? Cedula { get; set; }
-    [GraphQLNonNullType]
     public string? RNC { get; set; }
 }
 
