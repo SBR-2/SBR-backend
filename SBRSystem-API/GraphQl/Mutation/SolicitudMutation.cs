@@ -155,15 +155,12 @@ namespace SBRSystem_API.GraphQl.Mutation
 
         async Task<int> CalcularRiesgoTotal(Solicitud solicitud, MySBRDbContext context)
         {
-            if (solicitud.Producto is not null || solicitud.Opcions is null)
+            if (solicitud.Producto is null || solicitud.Opcions is null)
             {
                 return 0;
             }
 
             int riesgoTotal = 0;
-
-            Console.WriteLine(solicitud.Opcions.Count);
-            // Console.WriteLine(solicitud.Producto.RiesgoSubcategoria.Riesgo.Riesgo1);
 
             foreach (var opcion in solicitud.Opcions)
             {
@@ -171,20 +168,20 @@ namespace SBRSystem_API.GraphQl.Mutation
                 riesgoTotal += Convert.ToInt32(opcion.Valor) * (Convert.ToInt32(context.Factors.FindAsync(opcion.FactorId).Result.Peso / 100));
             }
 
-            //switch (solicitud.Producto.RiesgoSubcategoria.Riesgo.Riesgo1)
-            //{
-            //    case "BAJO":
-            //        riesgoTotal *= 1;
-            //        break;
-            //    case "MEDIO":
-            //        riesgoTotal *= 2;
-            //        break;
-            //    case "ALTO":
-            //        riesgoTotal *= 3;
-            //        break;
-            //    default:
-            //        break;
-            //}
+            switch (solicitud.Producto.RiesgoSubcategoria.Riesgo.Riesgo1)
+            {
+                case "BAJO":
+                    riesgoTotal *= 1;
+                    break;
+                case "MEDIO":
+                    riesgoTotal *= 2;
+                    break;
+                case "ALTO":
+                    riesgoTotal *= 3;
+                    break;
+                default:
+                    break;
+            }
 
             return riesgoTotal;
         }
