@@ -20,4 +20,6 @@ public partial class Entidad
     public string? Rnc { get; set; }
 
     public virtual ICollection<ProductoEntidad> ProductoEntidads { get; set; } = new List<ProductoEntidad>();
+
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 }

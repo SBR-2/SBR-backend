@@ -23,6 +23,10 @@ public partial class Solicitud
 
     public bool? EsExportado { get; set; }
 
+    public DateTime? FechaRechazo { get; set; }
+
+    public float? RiesgoTotal { get; set; }
+
     public virtual ICollection<Documento> Documentos { get; set; } = new List<Documento>();
 
     public virtual ICollection<Ficha> Fichas { get; set; } = new List<Ficha>();
