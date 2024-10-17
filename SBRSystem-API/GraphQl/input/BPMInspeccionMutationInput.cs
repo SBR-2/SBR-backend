@@ -4,23 +4,16 @@ namespace SBRSystem_API.GraphQl.input;
 
 public class AddGrupoInput
 {
+    [GraphQLNonNullType] public string Nombre { get; set; }
 
-    [GraphQLNonNullType]
-    public string Nombre { get; set; }
+    [GraphQLNonNullType] public string Descripcion { get; set; }
 
-    [GraphQLNonNullType]
-    public string Descripcion { get; set; }
-
-    [GraphQLNonNullType]
-    public bool Estado { get; set; }
+    [GraphQLNonNullType] public bool Estado { get; set; }
 }
 
-
-public class AddBpmCategoria: AddInputBPM
+public class AddBpmCategoria : AddInputBPM
 {
     public int GrupoId { get; set; }
-
-    
 }
 
 public class AddInputBPM
@@ -30,18 +23,15 @@ public class AddInputBPM
     public string Descripcion { get; set; }
 
     public bool Estado { get; set; }
-    
 }
 
-public class AddSubBpmCategoria: AddInputBPM
+public class AddSubBpmCategoria : AddInputBPM
 {
     public int BpmCategoriaId { get; set; }
-
 }
 
-public class AddPregunta: AddInputBPM
+public class AddPregunta : AddInputBPM
 {
-    
     public int BpmSubcategoriaId { get; set; }
 }
 
@@ -80,40 +70,39 @@ public class AddValorInput
 
 public class AddEstablecimientoInput
 {
-    
-    public string  Nombre { get; set; }
+    public string Nombre { get; set; }
 
-    public string  Numero { get; set; }
+    public string Numero { get; set; }
 
-    public Municipio  Municipio { get; set; }
+    public Municipio Municipio { get; set; }
 
-    public string  Telefono { get; set; }
+    public string Telefono { get; set; }
 
-    public DateTime  InicioOperaciones { get; set; }
+    public DateTime InicioOperaciones { get; set; }
 
-    public DateTime  VencimientoSanitario { get; set; }
+    public DateTime VencimientoSanitario { get; set; }
 
-    public string  Rnc { get; set; }
+    public string Rnc { get; set; }
 
-    public int  NumProductosElaborados { get; set; }
+    public int NumProductosElaborados { get; set; }
 
-    public int  ProduccionAnual { get; set; }
+    public int ProduccionAnual { get; set; }
 
-    public string  Comercializacion { get; set; }
+    public string Comercializacion { get; set; }
 
     public int MercadoObjetivo_id { get; set; }
 
-    public MercadoObjetivo  MercadoObjetivo { get; set; }
+    public MercadoObjetivo MercadoObjetivo { get; set; }
 
-    public int  NumEmpleados { get; set; }
+    public int NumEmpleados { get; set; }
 
-    public DateTime  UltimaInspeccion { get; set; }
+    public DateTime UltimaInspeccion { get; set; }
 
-    public long  CalUltimaInspeccion { get; set; }
+    public long CalUltimaInspeccion { get; set; }
 
-    public string  NombreDps { get; set; }
+    public string NombreDps { get; set; }
 
-    public string  NombreDigemaps { get; set; }
+    public string NombreDigemaps { get; set; }
 
-    public bool  NoSanitario { get; set; }
+    public string NoSanitario { get; set; }
 }
