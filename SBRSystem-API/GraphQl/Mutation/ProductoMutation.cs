@@ -23,6 +23,8 @@ public class ProductoMutation
             Origen = input.Origen,
             Estado = input.Estado,
             Presentaciones = input.Presentaciones,
+            RiesgoSubcategoriaId = input.RiesgoSubcategoriaId,
+            UsuarioId = input.UsuarioId,
             EstadoFisicoId = input.EstadoFisicoId,
             EnvasePrimario = input.EnvasePrimario,
             MaterialEmpaque = input.MaterialEmpaque,
