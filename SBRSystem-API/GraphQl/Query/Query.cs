@@ -90,7 +90,6 @@ public static class Query
     public static async Task<IQueryable<Preguntum>> GetPregunta(MySBRDbContext context)
         => context.Pregunta;
 
-    [UseOffsetPaging]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
