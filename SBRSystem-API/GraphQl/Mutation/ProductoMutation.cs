@@ -62,7 +62,7 @@ public class ProductoMutation
             throw new GraphQLException("Ocurrio un error al tratar de agregar un producto", ex);
         }
 
-        return newProducto;
+        return newproduct;
     }
 
     public async Task<bool> DeleteProductoAsync(int productoId, [Service] MySBRDbContext context)
