@@ -34,13 +34,14 @@ public class ProductoMutation
 
         context.Productos.Add(newProducto);
 
+        Producto newproduct = context.Productos.First(x => x.Nombre == newProducto.Nombre);
         try
         {
             await context.SaveChangesAsync();
 
             foreach (var productoEntidad in input.ProductoEntidades)
             {
-                productoEntidad.ProductoId = newProducto.ProductoId;
+                productoEntidad.ProductoId = newproduct.ProductoId;
 
                 ProductoEntidad puente = new ProductoEntidad
                 {
