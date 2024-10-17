@@ -4,12 +4,16 @@ namespace SBRSystem_API.GraphQl.input;
 
 public class AddProductoInput
 {
+
     [GraphQLNonNullType]
     public string? Nombre { get; set; }
     [GraphQLNonNullType]
     public string? Marca { get; set; }
     [GraphQLNonNullType]
     public int? RiesgoSubcategoriaId { get; set; }
+    
+    [GraphQLNonNullType]
+    public int? UsuarioId { get; set; }
     [GraphQLNonNullType]
     public string? Origen { get; set; }
     [GraphQLNonNullType]
