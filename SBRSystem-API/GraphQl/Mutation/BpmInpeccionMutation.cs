@@ -247,7 +247,7 @@ public class BpmInpeccionMutation
         {
             Nombre = input.Nombre,
             Numero = input.Numero,
-            Municipio = input.Municipio,
+            MunicipioId = input.MunicipioId,
             Telefono = input.Telefono,
             InicioOperaciones = input.InicioOperaciones,
             VencimientoSanitario = input.VencimientoSanitario,
