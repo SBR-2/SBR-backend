@@ -164,6 +164,7 @@ public static class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public static async Task<IQueryable<Valor>> GetValors(MySBRDbContext context)
-        => context.Valors;
+    public static async Task<IQueryable<TipoDocumento>> GetTipoDocumento(MySBRDbContext context)
+        => context.TipoDocumentos;
+    
 }
