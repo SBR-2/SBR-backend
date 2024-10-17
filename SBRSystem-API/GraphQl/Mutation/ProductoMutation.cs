@@ -11,7 +11,7 @@ public class ProductoMutation
 {
     public async Task<Producto> AddProductoAsync(AddProductoInput input, [Service] MySBRDbContext context)
     {
-        if (await context.Productos.AnyAsync(p => p.Nombre == input.Nombre))
+        if (await context.Productos.AnyAsync(p => p.Nombre == input.Nombre && p.UsuarioId == input.UsuarioId))
         {
             throw new GraphQLException("El producto ya existe");
         }
@@ -31,17 +31,26 @@ public class ProductoMutation
             Nacional = input.Nacional,
             UnIngrediente = input.UnIngrediente,
         };
-
-        context.Productos.Add(newProducto);
+        Producto newproduct;
 
         try
         {
+            context.Productos.Add(newProducto);
             await context.SaveChangesAsync();
+            newproduct =
+                context.Productos.First(x => x.Nombre == newProducto.Nombre && x.UsuarioId == input.UsuarioId);
 
             foreach (var productoEntidad in input.ProductoEntidades)
             {
-                productoEntidad.ProductoId = newProducto.ProductoId;
-                context.ProductoEntidads.Add(productoEntidad);
+                productoEntidad.ProductoId = newproduct.ProductoId;
+
+                ProductoEntidad puente = new ProductoEntidad
+                {
+                    ProductoId = productoEntidad.ProductoId,
+                    EntidadId = productoEntidad.EntidadId,
+                    RelacionId = productoEntidad.RelacionId,
+                };
+                context.ProductoEntidads.Add(puente);
             }
 
             await context.SaveChangesAsync();
@@ -53,7 +62,7 @@ public class ProductoMutation
             throw new GraphQLException("Ocurrio un error al tratar de agregar un producto", ex);
         }
 
-        return newProducto;
+        return newproduct;
     }
 
     public async Task<bool> DeleteProductoAsync(int productoId, [Service] MySBRDbContext context)

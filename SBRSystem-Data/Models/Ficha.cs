@@ -35,13 +35,21 @@ public partial class Ficha
 
     public string? NombreDigemaps { get; set; }
 
+    public int? MatizRiesgo { get; set; }
+
+    public int? EvaluadorId { get; set; }
+
     public virtual Usuario? Aprobador { get; set; }
 
     public virtual ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
 
     public virtual Establecimiento? Establecimiento { get; set; }
 
+    public virtual Usuario? Evaluador { get; set; }
+
     public virtual Usuario? Inspector { get; set; }
+
+    public virtual MatizRiesgo? MatizRiesgoNavigation { get; set; }
 
     public virtual ICollection<Respuestum> Respuesta { get; set; } = new List<Respuestum>();
 
