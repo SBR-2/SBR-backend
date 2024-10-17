@@ -41,7 +41,14 @@ public class ProductoMutation
             foreach (var productoEntidad in input.ProductoEntidades)
             {
                 productoEntidad.ProductoId = newProducto.ProductoId;
-                context.ProductoEntidads.Add(productoEntidad);
+
+                ProductoEntidad puente = new ProductoEntidad
+                {
+                    ProductoId = productoEntidad.ProductoId,
+                    EntidadId = productoEntidad.EntidadId,
+                    RelacionId = productoEntidad.RelacionId,
+                };
+                context.ProductoEntidads.Add(puente);
             }
 
             await context.SaveChangesAsync();
