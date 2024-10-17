@@ -5,6 +5,7 @@ using SBRSystem_Data.Models;
 
 namespace SBRSystem_API.GraphQl;
 
+[MutationType]
 public class EntidadMutation
 {
 
