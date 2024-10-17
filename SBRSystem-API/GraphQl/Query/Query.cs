@@ -159,12 +159,4 @@ public static class Query
     [UseSorting]
     public static async Task<IQueryable<Usuario>> GetUsuarios(MySBRDbContext context)
         => context.Usuarios;
-
-    [UseOffsetPaging]
-    [UseProjection]
-    [UseFiltering]
-    [UseSorting]
-    public static async Task<IQueryable<TipoDocumento>> GetTipoDocumento(MySBRDbContext context)
-        => context.TipoDocumentos;
-    
 }
