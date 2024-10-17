@@ -31,14 +31,14 @@ public class ProductoMutation
             Nacional = input.Nacional,
             UnIngrediente = input.UnIngrediente,
         };
+        Producto newproduct;
 
-        context.Productos.Add(newProducto);
-
-        Producto newproduct =
-            context.Productos.First(x => x.Nombre == newProducto.Nombre && x.UsuarioId == input.UsuarioId);
         try
         {
+            context.Productos.Add(newProducto);
             await context.SaveChangesAsync();
+            newproduct =
+                context.Productos.First(x => x.Nombre == newProducto.Nombre && x.UsuarioId == input.UsuarioId);
 
             foreach (var productoEntidad in input.ProductoEntidades)
             {
