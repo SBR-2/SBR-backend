@@ -29,6 +29,8 @@ public partial class Usuario
 
     public virtual ICollection<Ficha> FichaAprobadors { get; set; } = new List<Ficha>();
 
+    public virtual ICollection<Ficha> FichaEvaluadors { get; set; } = new List<Ficha>();
+
     public virtual ICollection<Ficha> FichaInspectors { get; set; } = new List<Ficha>();
 
     public virtual ICollection<Ficha> FichaRevisors { get; set; } = new List<Ficha>();

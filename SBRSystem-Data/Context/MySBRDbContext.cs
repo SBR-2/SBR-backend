@@ -38,6 +38,8 @@ public partial class MySBRDbContext : DbContext
 
     public virtual DbSet<Grupo> Grupos { get; set; }
 
+    public virtual DbSet<MatizRiesgo> MatizRiesgos { get; set; }
+
     public virtual DbSet<MercadoObjetivo> MercadoObjetivos { get; set; }
 
     public virtual DbSet<Municipio> Municipios { get; set; }
@@ -74,6 +76,7 @@ public partial class MySBRDbContext : DbContext
 
     public virtual DbSet<Valor> Valors { get; set; }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasPostgresEnum("estado_proceso", new[] { "En proceso", "Rechazada", "Aceptada", "archivado" });
@@ -83,6 +86,8 @@ public partial class MySBRDbContext : DbContext
             entity.HasKey(e => e.BpmCategoriaId).HasName("bpm_categoria_pkey");
 
             entity.ToTable("bpm_categoria");
+
+            entity.HasIndex(e => e.Nombre, "bpm_categoria_unique").IsUnique();
 
             entity.Property(e => e.BpmCategoriaId)
                 .HasDefaultValueSql("nextval('bpm_categoria_id_seq'::regclass)")
@@ -106,6 +111,8 @@ public partial class MySBRDbContext : DbContext
             entity.HasKey(e => e.BpmSubcategoriaId).HasName("bpm_subcategoria_pkey");
 
             entity.ToTable("bpm_subcategoria");
+
+            entity.HasIndex(e => e.Nombre, "bpm_subcategoria_unique").IsUnique();
 
             entity.Property(e => e.BpmSubcategoriaId)
                 .HasDefaultValueSql("nextval('bpm_subcategoria_id_seq'::regclass)")
@@ -251,7 +258,9 @@ public partial class MySBRDbContext : DbContext
                 .HasColumnName("inicio_operaciones");
             entity.Property(e => e.MercadoObjetivoId).HasColumnName("mercado_objetivo_id");
             entity.Property(e => e.MunicipioId).HasColumnName("municipio_id");
-            entity.Property(e => e.NoSanitario).HasColumnName("no_sanitario");
+            entity.Property(e => e.NoSanitario)
+                .HasColumnType("character varying")
+                .HasColumnName("no_sanitario");
             entity.Property(e => e.Nombre)
                 .HasColumnType("character varying")
                 .HasColumnName("nombre");
@@ -342,6 +351,7 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.Calificacion).HasColumnName("calificacion");
             entity.Property(e => e.EstablecimientoId).HasColumnName("establecimiento_id");
             entity.Property(e => e.Estado).HasColumnName("estado");
+            entity.Property(e => e.EvaluadorId).HasColumnName("evaluador_id");
             entity.Property(e => e.FechaAprobacion)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("fecha_aprobacion");
@@ -358,6 +368,7 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.Longitud)
                 .HasColumnType("character varying")
                 .HasColumnName("longitud");
+            entity.Property(e => e.MatizRiesgo).HasColumnName("matiz_riesgo");
             entity.Property(e => e.NombreDigemaps)
                 .HasColumnType("character varying")
                 .HasColumnName("nombre_digemaps");
@@ -376,10 +387,18 @@ public partial class MySBRDbContext : DbContext
                 .HasForeignKey(d => d.EstablecimientoId)
                 .HasConstraintName("ficha_establecimiento_id_fk");
 
+            entity.HasOne(d => d.Evaluador).WithMany(p => p.FichaEvaluadors)
+                .HasForeignKey(d => d.EvaluadorId)
+                .HasConstraintName("ficha_usuario_fk3");
+
             entity.HasOne(d => d.Inspector).WithMany(p => p.FichaInspectors)
                 .HasForeignKey(d => d.InspectorId)
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("ficha_usuario_fk");
+
+            entity.HasOne(d => d.MatizRiesgoNavigation).WithMany(p => p.Fichas)
+                .HasForeignKey(d => d.MatizRiesgo)
+                .HasConstraintName("matiz_riesgo_fk");
 
             entity.HasOne(d => d.Revisor).WithMany(p => p.FichaRevisors)
                 .HasForeignKey(d => d.RevisorId)
@@ -407,6 +426,20 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasColumnType("character varying")
                 .HasColumnName("nombre");
+        });
+
+        modelBuilder.Entity<MatizRiesgo>(entity =>
+        {
+            entity.HasKey(e => e.MatizRiesgoId).HasName("matiz_riesgo_id");
+
+            entity.ToTable("matiz_riesgo",
+                tb => tb.HasComment(
+                    "Periodicidad en base al riesgo total en que frecuencia se tiene que evaluar nuevamente "));
+
+            entity.Property(e => e.MatizRiesgoId)
+                .HasDefaultValueSql("nextval('matiz_riesgo_seq'::regclass)")
+                .HasColumnName("matiz_riesgo_id");
+            entity.Property(e => e.Estado).HasColumnName("estado");
         });
 
         modelBuilder.Entity<MercadoObjetivo>(entity =>
@@ -475,6 +508,8 @@ public partial class MySBRDbContext : DbContext
             entity.HasKey(e => e.PreguntaId).HasName("pregunta_pkey");
 
             entity.ToTable("pregunta");
+
+            entity.HasIndex(e => e.Nombre, "pregunta_unique").IsUnique();
 
             entity.Property(e => e.PreguntaId)
                 .HasDefaultValueSql("nextval('pregunta_id_seq'::regclass)")
@@ -873,6 +908,7 @@ public partial class MySBRDbContext : DbContext
         modelBuilder.HasSequence("factor_id_seq");
         modelBuilder.HasSequence("ficha_id_seq");
         modelBuilder.HasSequence("grupo_id_seq");
+        modelBuilder.HasSequence("matiz_riesgo_seq");
         modelBuilder.HasSequence("mercado_objetivo_seq");
         modelBuilder.HasSequence("municipio_seq");
         modelBuilder.HasSequence("opcion_id_seq");

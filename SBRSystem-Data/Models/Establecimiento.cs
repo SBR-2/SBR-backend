@@ -39,7 +39,7 @@ public partial class Establecimiento
 
     public string? NombreDigemaps { get; set; }
 
-    public bool? NoSanitario { get; set; }
+    public string? NoSanitario { get; set; }
 
     public virtual ICollection<Ficha> Fichas { get; set; } = new List<Ficha>();
 
