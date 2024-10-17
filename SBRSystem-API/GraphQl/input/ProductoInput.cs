@@ -18,10 +18,10 @@ public class AddProductoInput
     [GraphQLNonNullType] public bool? Nacional { get; set; }
     [GraphQLNonNullType] public bool? UnIngrediente { get; set; }
 
-    public ICollection<ProductoEntidadInput> ProductoEntidades { get; set; }
+    public ICollection<ProductoEntidadDTO> ProductoEntidades { get; set; }
 }
 
-public class ProductoEntidadInput
+public class ProductoEntidadDTO
 {
     public int ProductoId { get; set; }
 

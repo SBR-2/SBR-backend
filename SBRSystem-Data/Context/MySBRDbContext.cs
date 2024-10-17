@@ -76,9 +76,6 @@ public partial class MySBRDbContext : DbContext
 
     public virtual DbSet<Valor> Valors { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=207.246.81.247;Database=sbrdb;Port=5432;Username=sbradmin;Password=sbr1234;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -435,7 +432,9 @@ public partial class MySBRDbContext : DbContext
         {
             entity.HasKey(e => e.MatizRiesgoId).HasName("matiz_riesgo_id");
 
-            entity.ToTable("matiz_riesgo", tb => tb.HasComment("Periodicidad en base al riesgo total en que frecuencia se tiene que evaluar nuevamente "));
+            entity.ToTable("matiz_riesgo",
+                tb => tb.HasComment(
+                    "Periodicidad en base al riesgo total en que frecuencia se tiene que evaluar nuevamente "));
 
             entity.Property(e => e.MatizRiesgoId)
                 .HasDefaultValueSql("nextval('matiz_riesgo_seq'::regclass)")
