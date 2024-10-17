@@ -11,7 +11,7 @@ public class ProductoMutation
 {
     public async Task<Producto> AddProductoAsync(AddProductoInput input, [Service] MySBRDbContext context)
     {
-        if (await context.Productos.AnyAsync(p => p.Nombre == input.Nombre))
+        if (await context.Productos.AnyAsync(p => p.Nombre == input.Nombre && p.UsuarioId == input.UsuarioId))
         {
             throw new GraphQLException("El producto ya existe");
         }
@@ -34,7 +34,8 @@ public class ProductoMutation
 
         context.Productos.Add(newProducto);
 
-        Producto newproduct = context.Productos.First(x => x.Nombre == newProducto.Nombre);
+        Producto newproduct =
+            context.Productos.First(x => x.Nombre == newProducto.Nombre && x.UsuarioId == input.UsuarioId);
         try
         {
             await context.SaveChangesAsync();
