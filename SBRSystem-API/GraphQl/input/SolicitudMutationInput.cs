@@ -52,4 +52,11 @@ namespace SBRSystem_API.GraphQl.input
         [Length(6, 6, ErrorMessage = "Se deben de elegir 6 opciones para una solicitud valida")]
         public ICollection<int> OpcionIds { get; set; }
     }
+    
+    public class AsingarEvaludorSolicitudInput
+    {
+        public int? SolicitudId { get; set; }
+
+        public int? EvaluadorId { get; set; }
+    }
 }
