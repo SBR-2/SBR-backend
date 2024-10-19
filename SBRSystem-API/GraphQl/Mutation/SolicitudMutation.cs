@@ -152,6 +152,39 @@ namespace SBRSystem_API.GraphQl.Mutation
 
             return solicitud;
         }
+        
+        public async Task<Solicitud> AsignarEvaluadorASolicitud(AsingarEvaludorSolicitudInput solicitudInput, [Service] MySBRDbContext context)
+        {
+            // Find the solicitud and evaluador
+            var solicitud = await context.Solicituds.FindAsync(solicitudInput.SolicitudId);
+
+            if (solicitud == null)
+            {
+                throw new GraphQLException("No se encontró la solicitud con el id proporcionado.");
+            }
+            
+            // Find the evaluador
+            var evaluador = await context.Usuarios.FindAsync(solicitudInput.EvaluadorId);
+
+            if (evaluador == null)
+            {
+                throw new GraphQLException("No se encontró el evaluador con el id proporcionado.");
+            }
+
+            solicitud.Evaluador = solicitudInput.EvaluadorId;
+
+            try
+            {
+                context.Solicituds.Update(solicitud);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new GraphQLException("Ocurrió un error al asignar el evaluador a la solicitud.");
+            }
+
+            return solicitud;
+        }
 
         async Task<int> CalcularRiesgoTotal(Solicitud solicitud, MySBRDbContext context)
         {
