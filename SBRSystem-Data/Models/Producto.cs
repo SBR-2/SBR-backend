@@ -17,6 +17,9 @@ public partial class Producto
 
     public string? Origen { get; set; }
 
+    /// <summary>
+    /// activo - inactivo
+    /// </summary>
     public string? Estado { get; set; }
 
     public string? Presentaciones { get; set; }

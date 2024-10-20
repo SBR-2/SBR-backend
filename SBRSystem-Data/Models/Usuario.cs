@@ -38,4 +38,6 @@ public partial class Usuario
     public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
 
     public virtual Rol? Rol { get; set; }
+
+    public virtual ICollection<Solicitud> Solicituds { get; set; } = new List<Solicitud>();
 }

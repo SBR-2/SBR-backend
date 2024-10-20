@@ -542,6 +542,7 @@ public partial class MySBRDbContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("envase_primario");
             entity.Property(e => e.Estado)
+                .HasComment("activo - inactivo")
                 .HasColumnType("character varying")
                 .HasColumnName("estado");
             entity.Property(e => e.EstadoFisicoId).HasColumnName("estado_fisico_id");
@@ -781,6 +782,10 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.Estado)
                 .HasColumnType("character varying")
                 .HasColumnName("estado");
+            entity.Property(e => e.Evaluador)
+                .HasComment(
+                    "este es el evaluador encargado de este producto. Este campo es una llave foranea a la tabla usuarios")
+                .HasColumnName("evaluador");
             entity.Property(e => e.FechaCreacion)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("fecha_creacion");
@@ -794,6 +799,10 @@ public partial class MySBRDbContext : DbContext
             entity.Property(e => e.RiesgoTotal).HasColumnName("riesgo_total");
             entity.Property(e => e.TitularFabricante).HasColumnName("titular_fabricante");
             entity.Property(e => e.TitularRepresentacion).HasColumnName("titular_representacion");
+
+            entity.HasOne(d => d.EvaluadorNavigation).WithMany(p => p.Solicituds)
+                .HasForeignKey(d => d.Evaluador)
+                .HasConstraintName("solicitud_usuario_usuario_id_fk");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.Solicituds)
                 .HasForeignKey(d => d.ProductoId)

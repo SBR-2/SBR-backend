@@ -27,7 +27,14 @@ public partial class Solicitud
 
     public float? RiesgoTotal { get; set; }
 
+    /// <summary>
+    /// este es el evaluador encargado de este producto. Este campo es una llave foranea a la tabla usuarios
+    /// </summary>
+    public int? Evaluador { get; set; }
+
     public virtual ICollection<Documento> Documentos { get; set; } = new List<Documento>();
+
+    public virtual Usuario? EvaluadorNavigation { get; set; }
 
     public virtual ICollection<Ficha> Fichas { get; set; } = new List<Ficha>();
 

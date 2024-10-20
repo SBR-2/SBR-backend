@@ -13,11 +13,6 @@ public class EntidadMutation
     {
         var existingEntidad = await context.Entidads.FirstOrDefaultAsync(e => e.Cedula == input.Cedula);
 
-        if (existingEntidad != null)
-        {
-            throw new GraphQLException("This RNC Already Exists");
-        }
-
         var entidades = new Entidad
         {
             Cedula = input.Cedula,
