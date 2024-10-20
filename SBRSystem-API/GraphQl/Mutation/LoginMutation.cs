@@ -73,7 +73,8 @@ namespace SBRSystem_API.GraphQl
                 return new LoginResponse { 
                     Token = tokenHandler.WriteToken(token), 
                     Message = "Login exitoso",
-                    UserId = user.UsuarioId.ToString()
+                    UserId = user.UsuarioId.ToString(),
+                    RolId = user.RolId.ToString()
                 }; 
             }
             catch (Exception ex)
